@@ -10,8 +10,13 @@ def input_to_index(user_input)
   user_input.to_i - 1
 end
 
+<<<<<<< HEAD
 def move(board, index, current_player)
   board[index] = current_player
+=======
+def move(board, index, character ="X")
+  board[index] = character
+>>>>>>> d5a9b4a4f2ebad88a1ea9e1059b63a4e80376c17
 end
 
 def position_taken?(board, location)
@@ -27,14 +32,21 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
   if valid_move?(board, index)
+<<<<<<< HEAD
     move(board, index, current_player(board))
     display_board(board)
   else
     puts "Invalid input, try again."
+=======
+    move(board, index)
+    display_board(board)
+  else
+>>>>>>> d5a9b4a4f2ebad88a1ea9e1059b63a4e80376c17
     turn(board)
   end
 end
 
+<<<<<<< HEAD
 def play(board)
   until over?(board)
     turn(board)
@@ -70,6 +82,22 @@ def current_player(board)
   end
 end
 
+=======
+# Define your play method below
+def play(board)
+  turn = 0
+  while turn < 9
+    turn(board)
+    turn += 1
+  end
+end
+
+def position_taken?(board, index)
+  !(board[index].nil? || board[index] == " ")
+end
+
+# Define your WIN_COMBINATIONS constant
+>>>>>>> d5a9b4a4f2ebad88a1ea9e1059b63a4e80376c17
 WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
@@ -78,6 +106,7 @@ WIN_COMBINATIONS = [
   [1,4,7],
   [2,5,8],
   [0,4,8],
+<<<<<<< HEAD
   [6,4,2]
 ]
 
@@ -102,12 +131,24 @@ end
 
 def draw?(board)
   full?(board) && !won?(board)
+=======
+  [2,4,6]
+]
+
+def won?(board)
+  WIN_COMBINATIONS.detect do |combo|
+    board[combo[0]] == board[combo[1]] &&
+    board[combo[1]] == board[combo[2]] &&
+    position_taken?(board, combo[0])
+  end
+>>>>>>> d5a9b4a4f2ebad88a1ea9e1059b63a4e80376c17
 end
 
 def full?(board)
   board.all?{|i| i == "X" || i == "O"}
 end
 
+<<<<<<< HEAD
 def over?(board)
   draw?(board) || won?(board)
 end
@@ -120,5 +161,18 @@ def winner(board)
     elsif board[win_combination[0]] == "O"
       return "O"
     end
+=======
+def draw?(board)
+  full?(board) && !won?(board)
+end
+
+def over?(board)
+  won?(board) || full?(board)
+end
+
+def winner(board)
+  if winning_combo = won?(board)
+    board[winning_combo.first]
+>>>>>>> d5a9b4a4f2ebad88a1ea9e1059b63a4e80376c17
   end
 end
